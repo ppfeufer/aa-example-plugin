@@ -1,7 +1,7 @@
 # Example Plugin App for Alliance Auth (GitHub Version)
 
 This is an example plugin app for [Alliance Auth](https://gitlab.com/allianceauth/allianceauth)
-(AA) that can be used as starting point to develop custom plugins.
+(AA) that can be used as a starting point to develop custom plugins.
 
 ![License](https://img.shields.io/badge/license-GPLv3-green)
 ![python](https://img.shields.io/badge/python-3.8-informational)
@@ -14,6 +14,24 @@ For the GitLab version of this example app, please have a look over here, Erik
 Kalkoken was so friendly to provide it » [Alliance Auth Example App (GitLab Version)](https://gitlab.com/ErikKalkoken/allianceauth-example-plugin)
 
 
+---
+
+<!-- TOC -->
+* [Example Plugin App for Alliance Auth (GitHub Version)](#example-plugin-app-for-alliance-auth-github-version)
+  * [Features](#features)
+  * [How to Use It](#how-to-use-it)
+    * [Cloning From Repo](#cloning-from-repo)
+    * [Renaming the App](#renaming-the-app)
+  * [Clearing Migrations](#clearing-migrations)
+  * [Writing Unit Tests](#writing-unit-tests)
+  * [Installing Into Your Dev AA](#installing-into-your-dev-aa)
+  * [Installing Into Production AA](#installing-into-production-aa)
+  * [Contribute](#contribute)
+<!-- TOC -->
+
+---
+
+
 ## Features
 
 - The plugin can be installed, upgraded (and removed) into an existing AA
@@ -24,7 +42,7 @@ Kalkoken was so friendly to provide it » [Alliance Auth Example App (GitLab Ver
 
 ## How to Use It
 
-To use this example as basis for your own development just fork this repo and then
+To use this example as a basis for your own development, just fork this repo and then
 clone it on your dev machine.
 
 You then should rename the app, and then you can install it into your AA dev
@@ -33,8 +51,8 @@ installation.
 
 ### Cloning From Repo
 
-For this app we are assuming that you have all your AA projects, your virtual
-environment and your AA installation under one top folder (e.g. aa-dev).
+For this app, we're assuming that you have all your AA projects, your virtual
+environment, and your AA installation under one top folder (e.g. aa-dev).
 
 This should look something like this:
 
@@ -72,9 +90,9 @@ Easiest is to just find & replace `example` with your new app name in all files
 listed below.
 
 One small warning about picking names: Python is a bit particular about what special
-characters are allowed for names of modules and packages. To avoid any pitfalls I
-would therefore recommend to use only normal characters (a-z) in your app's name
-unless you know exactly what you are doing.
+characters are allowed for names of modules and packages. To avoid any pitfalls, I
+would therefore recommend using only normal characters (a-z) in your app's name
+unless you know exactly what you're doing.
 
 | Location                                 | Description                                                                            |
 |------------------------------------------|----------------------------------------------------------------------------------------|
@@ -102,8 +120,8 @@ unless you know exactly what you are doing.
 
 ## Clearing Migrations
 
-Instead of renaming your app in the migrations it's easier to just recreate them
-later in the process. For this to work you need to delete the old migration files in
+Instead of renaming your app in the migrations, it's easier to just recreate them
+later in the process. For this to work, you need to delete the old migration files in
 your `migrations` folder.
 
 ```bash
@@ -120,10 +138,10 @@ prefix for files with your unit tests.
 
 ## Installing Into Your Dev AA
 
-Once you have cloned or copied all files into place and finished renaming the app
-you are ready to install it to your dev AA instance.
+Once you've cloned or copied all files into place and finished renaming the app,
+you're ready to install it to your dev AA instance.
 
-Make sure you are in your venv. Then install it with pip in editable mode:
+Make sure you're in your venv. Then install it with pip in editable mode:
 
 ```bash
 pip install -e aa-your-app-name
@@ -132,7 +150,7 @@ pip install -e aa-your-app-name
 First add your app to the Django project by adding the name of your app to
 INSTALLED_APPS in `settings/local.py`.
 
-Next we will create new migrations for your app:
+Next, we will create new migrations for your app:
 
 ```bash
 python manage.py makemigrations
@@ -144,9 +162,9 @@ Then run a check to see if everything is set up correctly.
 python manage.py check
 ```
 
-In case they are errors make sure to fix them before proceeding.
+In case they're errors make sure to fix them before proceeding.
 
-Next perform migrations to add your model to the database:
+Next, perform migrations to add your model to the database:
 
 ```bash
 python manage.py migrate
@@ -157,14 +175,14 @@ Finally, restart your AA server and that's it.
 
 ## Installing Into Production AA
 
-To install your plugin into a production AA run this command within the virtual
+To install your plugin into a production AA, run this command within the virtual
 Python environment of your AA installation:
 
 ```bash
 pip install git+https://github.com/YourName/aa-your-app-name
 ```
 
-Alternatively you can create a package file and manually upload it to your
+Alternatively, you can create a package file and manually upload it to your
 production AA:
 
 ```bash
@@ -186,7 +204,7 @@ restart your allianceserver.
 
 ## Contribute
 
-If you made a new app for AA please consider sharing it with the rest of the
-community. For any questions on how to share your app please contact the AA devs on
+If you've made a new app for AA, please consider sharing it with the rest of the
+community. For any questions on how to share your app, please contact the AA devs on
 their Discord. You find the current community creations
 [here](https://gitlab.com/allianceauth/community-creations).
