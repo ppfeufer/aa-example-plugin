@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [0.0.6] - 2023-04-18
+
+### Added
+
+- Ukrainian to language handling in `Makefile`
+
+
 ## [0.0.5] - 2023-04-18
 
 ### Added
