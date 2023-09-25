@@ -83,19 +83,19 @@ repos:
       - id: text-unicode-replacement-char
 
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.14.0
+    rev: 1.15.0
     hooks:
       - id: django-upgrade
         args: [ --target-version=4.0 ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.9.0
+    rev: v3.13.0
     hooks:
       - id: pyupgrade
         args: [ --py38-plus ]
 
   - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
 
@@ -104,19 +104,19 @@ repos:
     hooks:
       - id: yesqa
 
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
     hooks:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 23.9.1
     hooks:
       - id: black
         args: [ --target-version=py38 ]
 
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.15.0
+    rev: 1.16.0
     hooks:
       - id: blacken-docs
         additional_dependencies: [ black==23.7.0 ]
