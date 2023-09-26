@@ -106,7 +106,7 @@ unless you know exactly what you're doing.
 | `./example/views.py`                     | Permission name and template path                                                      |
 | `./example/templates/example/base.html`  | Title of your app to be shown in all views and as title in the browser tab             |
 | `./example/templates/example/index.html` | Template path                                                                          |
-| `./testauth/settings.py`                 | App name in `PACKAGE` and `INSTALLED_APPS` constants                                   |
+| `./testauth/local.py`                    | App name in `PACKAGE` constant                                                         |
 | `./.coveragerc`                          | App name                                                                               |
 | `./MANIFEST.in`                          | App name                                                                               |
 | `./README.md`                            | Clear content                                                                          |
