@@ -5,25 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## \[In Development\] - Unreleased
 
-## [In Development] - Unreleased
+### Changed
 
+- Moved the build process to PEP 621 / pyproject.toml
 
-## [0.0.6] - 2023-07-23
+## \[0.0.6\] - 2023-07-23
 
 ### Added
 
 - Ukrainian to language handling in `Makefile`
 
-
-## [0.0.5] - 2023-04-18
+## \[0.0.5\] - 2023-04-18
 
 ### Added
 
 - Directory for translation files
 
-
-## [0.0.4] - 2022-11-26
+## \[0.0.4\] - 2022-11-26
 
 ### Added
 
@@ -35,15 +35,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `pre-commit` config updated and applied
 - Example test improved
 
-
-## [0.0.3] - 2022-09-15
+## \[0.0.3\] - 2022-09-15
 
 ### Added
 
 - `SITE_URL` to test settings
 
-
-## [0.0.2] - 2022-08-17
+## \[0.0.2\] - 2022-08-17
 
 ### Added
 
@@ -55,8 +53,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Test settings updated for Alliance Auth v3
 - Package name in setup.cfg for PyPi
 
-
-## [0.0.1] - 2022-03-12
+## \[0.0.1\] - 2022-03-12
 
 ### Added
 
