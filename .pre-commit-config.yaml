@@ -86,13 +86,13 @@ repos:
     rev: 1.15.0
     hooks:
       - id: django-upgrade
-        args: [ --target-version=4.0 ]
+        args: [ --target-version=4.0 ] # Minimum supported Django version for AA. Update as needed.
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.13.0
     hooks:
       - id: pyupgrade
-        args: [ --py38-plus ]
+        args: [ --py38-plus ]  # Minimum required Python version for AA. Update as needed.
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
@@ -113,14 +113,14 @@ repos:
     rev: 23.9.1
     hooks:
       - id: black
-        args: [ --target-version=py38 ]
+        args: [ --target-version=py38 ]  # Minimum required Python version for AA. Update as needed.
 
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
     hooks:
       - id: blacken-docs
-        additional_dependencies: [ black==23.7.0 ]
-        args: [ --target-version=py38 ]
+        additional_dependencies: [ black==23.9.1 ]
+        args: [ --target-version=py38 ]  # Minimum required Python version for AA. Update as needed.
 
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: v2.4.0
