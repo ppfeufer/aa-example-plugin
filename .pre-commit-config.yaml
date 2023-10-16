@@ -19,7 +19,7 @@ ci:
 # pre-commit setup
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       # Identify invalid files
       - id: check-ast
@@ -70,7 +70,7 @@ repos:
           )
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.7.2
+    rev: 2.7.3
     hooks:
       - id: editorconfig-checker
         exclude: |
@@ -94,7 +94,7 @@ repos:
           - --target-version=4.0  # Minimum supported Django version for AA. Update as needed.
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.13.0
+    rev: v3.15.0
     hooks:
       - id: pyupgrade
         args:
@@ -160,6 +160,6 @@ repos:
           - tox==4.11.3  # https://github.com/tox-dev/tox/releases/latest
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.14
+    rev: v0.15
     hooks:
       - id: validate-pyproject
