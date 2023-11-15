@@ -116,7 +116,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 23.10.1
+    rev: 23.11.0
     hooks:
       - id: black
         args:
@@ -151,7 +151,7 @@ repos:
       - id: tox-ini-fmt
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: 1.4.1
+    rev: 1.5.1
     hooks:
       - id: pyproject-fmt
         args:
