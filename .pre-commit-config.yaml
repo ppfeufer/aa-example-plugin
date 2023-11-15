@@ -3,6 +3,10 @@
 # Update this file:
 #   pre-commit autoupdate
 
+default_language_version:
+  # force all unspecified python hooks to run python3
+  python: python3
+
 # https://pre-commit.ci/
 ci:
   autofix_commit_msg: |
@@ -12,7 +16,7 @@ ci:
   autofix_prs: false
   autoupdate_branch: ''
   autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
-  autoupdate_schedule: weekly
+  autoupdate_schedule: monthly
   skip: []
   submodules: false
 
@@ -44,6 +48,7 @@ repos:
         args:
           - --remove
       - id: fix-byte-order-marker
+      - id: check-builtin-literals
 
       # General quality checks
       - id: mixed-line-ending
@@ -54,20 +59,38 @@ repos:
           - --markdown-linebreak-ext=md
         exclude: |
           (?x)(
-            .min\.css|
-            .min\.js|
-            .po|
-            .mo
+            .min(.css|.css.map|.js|.js.map)|
+            locale/|
+            static/(.*)/libs/
           )
       - id: check-executables-have-shebangs
       - id: end-of-file-fixer
         exclude: |
           (?x)(
-            .min\.css|
-            .min\.js|
-            .po|
-            .mo
+            .min(.css|.css.map|.js|.js.map)|
+            locale/|
+            static/(.*)/libs/
           )
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.53.0
+    hooks:
+      - id: eslint
+        exclude: |
+          (?x)(
+            .min(.js|.js.map)|
+            static/(.*)/libs/
+          )
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa  # Enforce that noqa annotations always occur with specific codes. Sample annotations: # noqa: F401, # noqa: F401,W203
+      - id: python-check-blanket-type-ignore  # Enforce that # type: ignore annotations always occur with specific codes. Sample annotations: # type: ignore[attr-defined], # type: ignore[attr-defined, name-defined]
+      - id: python-check-mock-methods  # Prevent common mistakes of assert mck.not_called(), assert mck.called_once_with(...) and mck.assert_called
+      - id: python-no-eval  # A quick check for the eval() built-in function
+      - id: python-no-log-warn  #  A quick check for the deprecated .warn() method of python loggers
+      - id: python-use-type-annotations  # Enforce that python3.6+ type annotations are used instead of type comments
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: 2.7.3
@@ -75,16 +98,10 @@ repos:
       - id: editorconfig-checker
         exclude: |
           (?x)(
-            LICENSE
+            LICENSE|
+            .min(.css|.css.map|.js|.js.map)|
+            static/(.*)/libs/
           )
-
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
-    hooks:
-      - id: python-check-mock-methods
-      - id: python-no-log-warn
-      - id: python-use-type-annotations
-      - id: text-unicode-replacement-char
 
   - repo: https://github.com/adamchainz/django-upgrade
     rev: 1.15.0
@@ -114,6 +131,15 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
+        exclude: |
+          (?x)(
+            testauth/
+          )
+
+  - repo: https://github.com/Pierre-Sassoulas/black-disable-checker/
+    rev: v1.1.3
+    hooks:
+      - id: black-disable-checker
 
   - repo: https://github.com/psf/black
     rev: 23.11.0
@@ -127,7 +153,7 @@ repos:
     hooks:
       - id: blacken-docs
         additional_dependencies:
-          - black==23.10.1  # https://github.com/psf/black/releases/latest
+          - black==23.11.0  # https://github.com/psf/black/releases/latest
         args:
           - --target-version=py38  # Minimum required Python version for AA. Update as needed.
 
