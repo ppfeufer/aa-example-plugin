@@ -1,14 +1,15 @@
 {% extends 'example/base.html' %}
+
 {% load i18n %}
 {% load humanize %}
 
 {% block details %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <div class="panel-title">{% translate "Panel Headline" %}</div>
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="card-title">{% translate "Headline" %}</div>
         </div>
 
-        <div class="panel-body">
+        <div class="card-body">
             {{ text }}
         </div>
     </div>
