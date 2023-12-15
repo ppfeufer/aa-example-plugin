@@ -75,12 +75,12 @@ jobs:
       - name: Upload Coverage
         if: ${{
               (
-                github.event_name == 'pull_request' ||
-                (
-                  github.event_name == 'push' &&
-                  github.ref == 'refs/heads/master'
-                )
-              ) 
+              github.event_name == 'pull_request' ||
+              (
+              github.event_name == 'push' &&
+              github.ref == 'refs/heads/master'
+              )
+              )
               && matrix.python-version == '3.11'
             }}
         uses: codecov/codecov-action@v3
