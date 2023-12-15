@@ -72,25 +72,25 @@ jobs:
         # Run tox using the version of Python in `PATH`
         run: tox -v
 
-      - name: Upload Coverage
-        if: ${{
-              (
-              github.event_name == 'pull_request' ||
-              (
-              github.event_name == 'push' &&
-              github.ref == 'refs/heads/master'
-              )
-              )
-              && matrix.python-version == '3.11'
-            }}
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          files: coverage.xml # optional
+#      - name: Upload Coverage
+#        if: ${{
+#              (
+#              github.event_name == 'pull_request' ||
+#              (
+#              github.event_name == 'push' &&
+#              github.ref == 'refs/heads/master'
+#              )
+#              )
+#              && matrix.python-version == '3.11'
+#            }}
+#        uses: codecov/codecov-action@v3
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+#          files: coverage.xml # optional
 #          flags: unittests # optional
 #          name: codecov-umbrella # optional
 #          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
+#          verbose: true # optional (default = false)
 
   # Pypi Build Test
   pypi-build-test:
