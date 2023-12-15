@@ -28,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
+          python-version-file: 'pyproject.toml' # Read the Python version from the pyproject.toml file
 
       - name: Run Pre Commit Checks
         uses: pre-commit/action@v3.0.0
@@ -40,10 +40,13 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      # Set Python and Django version to test for the stable release of AllianceAuth
+      # Set Python and Django versions to test for the stable release of AllianceAuth
       matrix:
-        # Don't forget to change the Python version for [upload-coverage] as well
-        python-version: [ '3.8', '3.9', '3.10', '3.11' ]
+        python-version:
+          - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
 
     steps:
       - name: Checkout
@@ -69,41 +72,25 @@ jobs:
         # Run tox using the version of Python in `PATH`
         run: tox -v
 
-      - name: Upload Coverage Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Coverage
+        if: ${{
+              (
+                github.event_name == 'pull_request' ||
+                (
+                  github.event_name == 'push' &&
+                  github.ref == 'refs/heads/master'
+                )
+              ) 
+              && matrix.python-version == '3.11'
+            }}
+        uses: codecov/codecov-action@v3
         with:
-          name: coverage-python-${{ matrix.python-version }}
-          path: coverage.xml
-          if-no-files-found: ignore
-
-  # Coverage upload to Codecov
-#  upload-coverage:
-#    needs: [ test-coverage ]
-#    name: Upload Coverage
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Download artifacts
-#        uses: actions/download-artifact@v3
-#        with:
-#          path: artifacts
-#
-#      - name: Display structure of downloaded files
-#        run: ls -Rrtlh
-#        working-directory: artifacts
-#
-#      - name: Upload Coverage to Codecov
-#        uses: codecov/codecov-action@v3
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-#          files: artifacts/coverage-python-3.10/coverage.xml # optional
-##          flags: unittests # optional
-##          name: codecov-umbrella # optional
-##          fail_ci_if_error: true # optional (default = false)
-#          verbose: true # optional (default = false)
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: coverage.xml # optional
+#          flags: unittests # optional
+#          name: codecov-umbrella # optional
+#          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
 
   # Pypi Build Test
   pypi-build-test:
@@ -118,7 +105,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: 'pyproject.toml' # Read python version from a file pyproject.toml
+          python-version-file: 'pyproject.toml' # Read the Python version from the pyproject.toml file
 
       - name: Install Tools
         run: |
