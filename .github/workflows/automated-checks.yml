@@ -70,7 +70,7 @@ jobs:
         run: tox -v
 
       - name: Upload Coverage Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-python-${{ matrix.python-version }}
           path: coverage.xml
@@ -133,7 +133,7 @@ jobs:
           python -m build
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-${{ github.event_name }}-${{ github.sha }}
           path: dist
