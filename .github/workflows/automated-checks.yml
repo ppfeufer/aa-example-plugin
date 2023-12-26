@@ -34,9 +34,9 @@ jobs:
         uses: pre-commit/action@v3.0.1
 
   # Run Test Coverage
-  test-coverage-aa-stable:
-    needs: [pre-commit]
-    name: AA Latest (Python ${{ matrix.python-version }}, Django ${{ matrix.django-version }} with ${{ matrix.database }})
+  test-coverage:
+    needs: [ pre-commit ]
+    name: Test Coverage (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -48,30 +48,6 @@ jobs:
           - '3.10'
           - '3.11'
           - '3.12'
-        # MySQL versions to test against
-        database:
-          # https://endoflife.date/mysql
-          - mysql:8.0     # [LTS] Maintained until: 30 Apr 2026
-          - mysql:8.1     # Latest official release
-          # https://endoflife.date/mariadb and https://mariadb.com/kb/en/mariadb-server-release-dates/
-          - mariadb:10.4  # Maintained until: 18 June 2024
-          - mariadb:10.5  # Maintained until: 24 June 2025
-          - mariadb:10.6  # [LTS] Maintained until: July 2026
-          - mariadb:10.11 # [LTS] Maintained until: February 2028
-          - mariadb:11.0  # Maintained until: June 2024
-          - mariadb:11.1  # Maintained until: August 2024
-
-#    continue-on-error: ${{ matrix.python-version == '3.11-dev' }}
-
-    services:
-      database:
-        image: ${{ matrix.database }}
-        env:
-          MYSQL_ROOT_PASSWORD: temp_password_aa_tox_tests
-          MYSQL_DATABASE: tox_allianceauth
-        ports:
-          - 3306:3306
-        options: --tmpfs /var/lib/mysql
 
     steps:
       - name: Checkout
@@ -127,7 +103,7 @@ jobs:
 
   # Pypi Build Test
   pypi-build-test:
-    needs: [ test-coverage-aa-stable ]
+    needs: [ test-coverage ]
     name: PyPi Build Test
     runs-on: ubuntu-latest
 
