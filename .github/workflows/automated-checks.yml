@@ -1,4 +1,4 @@
-name: Checks
+name: Tests
 
 on:
   push:
@@ -34,19 +34,44 @@ jobs:
         uses: pre-commit/action@v3.0.1
 
   # Run Test Coverage
-  test-coverage:
-    needs: [ pre-commit ]
-    name: Test Coverage (Python ${{ matrix.python-version }})
+  test-coverage-aa-stable:
+    needs: [pre-commit]
+    name: AA Latest (Python ${{ matrix.python-version }}, Django ${{ matrix.django-version }} with ${{ matrix.database }})
     runs-on: ubuntu-latest
 
     strategy:
-      # Set Python and Django versions to test for the stable release of AllianceAuth
+      # Set Python and Django version to test for the stable release of AllianceAuth
       matrix:
         python-version:
           - '3.8'
           - '3.9'
           - '3.10'
           - '3.11'
+          - '3.12'
+        # MySQL versions to test against
+        database:
+          # https://endoflife.date/mysql
+          - mysql:8.0     # [LTS] Maintained until: 30 Apr 2026
+          - mysql:8.1     # Latest official release
+          # https://endoflife.date/mariadb and https://mariadb.com/kb/en/mariadb-server-release-dates/
+          - mariadb:10.4  # Maintained until: 18 June 2024
+          - mariadb:10.5  # Maintained until: 24 June 2025
+          - mariadb:10.6  # [LTS] Maintained until: July 2026
+          - mariadb:10.11 # [LTS] Maintained until: February 2028
+          - mariadb:11.0  # Maintained until: June 2024
+          - mariadb:11.1  # Maintained until: August 2024
+
+#    continue-on-error: ${{ matrix.python-version == '3.11-dev' }}
+
+    services:
+      database:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_ROOT_PASSWORD: temp_password_aa_tox_tests
+          MYSQL_DATABASE: tox_allianceauth
+        ports:
+          - 3306:3306
+        options: --tmpfs /var/lib/mysql
 
     steps:
       - name: Checkout
@@ -69,32 +94,40 @@ jobs:
           python -m pip install --upgrade tox tox-gh-actions
 
       - name: Run Tox
+        env:
+          TOX_ENV: allianceauth-stable
+          DB_HOST: 127.0.0.1
+          DB_USER: root
+          DB_PASSWORD: temp_password_aa_tox_tests
         # Run tox using the version of Python in `PATH`
-        run: tox -v
+        run: tox -v -e ${{ env.TOX_ENV }}
 
 #      - name: Upload Coverage
 #        if: ${{
 #              (
-#              github.event_name == 'pull_request' ||
-#              (
-#              github.event_name == 'push' &&
-#              github.ref == 'refs/heads/master'
+#                github.event_name == 'pull_request'
+#                || (
+#                  github.event_name == 'push'
+#                  && github.ref == 'refs/heads/master'
+#                )
 #              )
+#              && (
+#                matrix.python-version == '3.10'
+#                && matrix.database == 'mariadb:10.11'
 #              )
-#              && matrix.python-version == '3.11'
 #            }}
 #        uses: codecov/codecov-action@v3
 #        with:
 #          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
 #          files: coverage.xml # optional
-#          flags: unittests # optional
-#          name: codecov-umbrella # optional
-#          fail_ci_if_error: true # optional (default = false)
+##          flags: unittests # optional
+##          name: codecov-umbrella # optional
+##          fail_ci_if_error: true # optional (default = false)
 #          verbose: true # optional (default = false)
 
   # Pypi Build Test
   pypi-build-test:
-    needs: [ test-coverage ]
+    needs: [ test-coverage-aa-stable ]
     name: PyPi Build Test
     runs-on: ubuntu-latest
 
