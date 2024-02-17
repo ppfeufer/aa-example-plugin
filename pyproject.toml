@@ -38,7 +38,7 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "allianceauth>=4.0.0a5",
+    "allianceauth>=4.0.0b1",
 ]
 [project.urls]
 Changelog = "https://github.com/ppfeufer/aa-example-plugin/blob/master/CHANGELOG.md"
