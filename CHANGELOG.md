@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## \[In Development\] - Unreleased
 
+## \[0.0.8\] - 2024-03-16
+
+> \[!NOTE\]
+>
+> **This version needs at least Alliance Auth v4.0.0!**
+
+### Added
+
+- Compatibility to Alliance Auth v4
+  - Bootstrap 5
+  - Django 4.2
+
+### Removed
+
+- Compatibility to Alliance Auth v3
+
 ## \[0.0.7\] - 2023-09-27
+
+> \[!NOTE\]
+>
+> **This is the last version compatible with Alliance Auth v3.**
 
 ### Changed
 
