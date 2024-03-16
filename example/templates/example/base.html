@@ -1,12 +1,17 @@
-{% extends 'allianceauth/base.html' %}
+{% extends 'allianceauth/base-bs5.html' %}
+
 {% load i18n %}
 
-{% block page_title %}{% translate "Example Plugin" %}{% endblock %}
+{% block page_title %}
+    {% translate "Example Plugin" %}
+{% endblock %}
+
+{% block header_nav_brand %}
+    {% translate "Example Plugin" %}
+{% endblock header_nav_brand %}
 
 {% block content %}
     <div class="allianceauth-example-plugin">
-        <h1 class="page-header text-center">{% translate "Example Plugin" %}</h1>
-
         {% block details %}{% endblock %}
     </div>
 {% endblock %}

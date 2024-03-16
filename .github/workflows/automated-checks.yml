@@ -1,4 +1,4 @@
-name: Checks
+name: Tests
 
 on:
   push:
@@ -40,13 +40,14 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      # Set Python and Django versions to test for the stable release of AllianceAuth
+      # Set Python and Django version to test for the stable release of AllianceAuth
       matrix:
         python-version:
           - '3.8'
           - '3.9'
           - '3.10'
           - '3.11'
+          - '3.12'
 
     steps:
       - name: Checkout
@@ -75,21 +76,24 @@ jobs:
 #      - name: Upload Coverage
 #        if: ${{
 #              (
-#              github.event_name == 'pull_request' ||
-#              (
-#              github.event_name == 'push' &&
-#              github.ref == 'refs/heads/master'
+#                github.event_name == 'pull_request'
+#                || (
+#                  github.event_name == 'push'
+#                  && github.ref == 'refs/heads/master'
+#                )
 #              )
+#              && (
+#                matrix.python-version == '3.10'
+#                && matrix.database == 'mariadb:10.11'
 #              )
-#              && matrix.python-version == '3.11'
 #            }}
 #        uses: codecov/codecov-action@v3
 #        with:
 #          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
 #          files: coverage.xml # optional
-#          flags: unittests # optional
-#          name: codecov-umbrella # optional
-#          fail_ci_if_error: true # optional (default = false)
+##          flags: unittests # optional
+##          name: codecov-umbrella # optional
+##          fail_ci_if_error: true # optional (default = false)
 #          verbose: true # optional (default = false)
 
   # Pypi Build Test
