@@ -5,10 +5,13 @@ package = example
 .DEFAULT_GOAL := help
 
 # Help
+.PHONY: help
 help:
-	@echo "$(appname) Makefile"
 	@echo ""
-	@echo "Usage: make [command]"
+	@echo "$(appname_verbose) Makefile"
+	@echo ""
+	@echo "Usage:"
+	@echo "  make [command]"
 	@echo ""
 	@echo "Commands:"
 	@echo "  build_test          Build the package"
@@ -17,11 +20,13 @@ help:
 	@echo "  pre-commit-checks   Run pre-commit checks"
 	@echo "  tox_tests           Run tests with tox"
 	@echo "  translationfiles    Create or update translation files"
+	@echo ""
 
 # Translation files
+.PHONY: translationfiles
 translationfiles:
-	#cd $(package); \
-	django-admin makemessages \
+	@echo "Creating or updating translation files"
+	@django-admin makemessages \
 		-l cs \
 		-l de \
 		-l es \
@@ -39,17 +44,21 @@ translationfiles:
 		--ignore 'build/*'
 
 # Graph models
+.PHONY: graph_models
 graph_models:
-	python ../myauth/manage.py \
+	@echo "Creating a graph of the models"
+	@python ../myauth/manage.py \
 		graph_models \
 		$(package) \
 		--arrow-shape normal \
 		-o $(appname)-models.png
 
 # Coverage
+.PHONY: coverage
 coverage:
-	rm -rfv htmlcov; \
-	coverage run ../myauth/manage.py \
+	@echo "Running tests and creating a coverage report"
+	@rm -rf htmlcov
+	@coverage run ../myauth/manage.py \
 		test \
 		$(package) \
 		--keepdb \
@@ -58,16 +67,22 @@ coverage:
 	coverage report -m
 
 # Build test
+.PHONY: build_test
 build_test:
-	rm -rfv dist; \
-	python3 -m build
+	@echo "Building the package"
+	@rm -rf dist
+	@python3 -m build
 
 # Tox tests
+.PHONY: tox_tests
 tox_tests:
-	export USE_MYSQL=False; \
+	@echo "Running tests with tox"
+	@export USE_MYSQL=False; \
 	tox -v -e allianceauth-latest; \
 	rm -rf .tox/
 
 # Pre-commit checks
+.PHONY: pre-commit-checks
 pre-commit-checks:
-	pre-commit run --all-files
+	@echo "Running pre-commit checks"
+	@pre-commit run --all-files
