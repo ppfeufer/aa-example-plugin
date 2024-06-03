@@ -12,7 +12,7 @@ keywords = [
     "allianceauth",
     "example",
 ]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 authors = [
     { name = "Peter Pfeufer", email = "develop@ppfeufer.de" },
 ]
@@ -38,11 +38,10 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "allianceauth<5.0.0,>=4",
+    "allianceauth<5,>=4",
 ]
-[project.urls]
-Changelog = "https://github.com/ppfeufer/aa-example-plugin/blob/master/CHANGELOG.md"
-"Issue / Bug Reports" = "https://github.com/ppfeufer/aa-example-plugin/issues"
+urls.Changelog = "https://github.com/ppfeufer/aa-example-plugin/blob/master/CHANGELOG.md"
+urls."Issue / Bug Reports" = "https://github.com/ppfeufer/aa-example-plugin/issues"
 
 [tool.hatch.version]
 path = "example/__init__.py"
