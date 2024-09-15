@@ -14,27 +14,28 @@ help:
 	@echo "  make [command]"
 	@echo ""
 	@echo "Commands:"
-	@echo "  build_test          Build the package"
-	@echo "  coverage            Run tests and create a coverage report"
-	@echo "  graph_models        Create a graph of the models"
-	@echo "  pre-commit-checks   Run pre-commit checks"
-	@echo "  tox_tests           Run tests with tox"
-	@echo "  translationfiles    Create or update translation files"
+	@echo "  build_test              Build the package"
+	@echo "  coverage                Run tests and create a coverage report"
+	@echo "  graph_models            Create a graph of the models"
+	@echo "  pre-commit-checks       Run pre-commit checks"
+	@echo "  tox_tests               Run tests with tox"
+	@echo "  translations            Create or update translation files"
+	@echo "  compile_translations    Compile translation files"
 	@echo ""
 
 # Translation files
-.PHONY: translationfiles
-translationfiles:
+.PHONY: translations
+translations:
 	@echo "Creating or updating translation files"
 	@django-admin makemessages \
-		-l cs \
+		-l cs_CZ \
 		-l de \
 		-l es \
 		-l fr_FR \
 		-l it_IT \
 		-l ja \
 		-l ko_KR \
-		-l nl \
+		-l nl_NL \
 		-l pl_PL \
 		-l ru \
 		-l sk \
@@ -42,6 +43,25 @@ translationfiles:
 		-l zh_Hans \
 		--keep-pot \
 		--ignore 'build/*'
+
+# Compile translation files
+.PHONY: compile_translations
+compile_translations:
+	@echo "Compiling translation files"
+	@django-admin compilemessages \
+		-l cs_CZ \
+		-l de \
+		-l es \
+		-l fr_FR \
+		-l it_IT \
+		-l ja \
+		-l ko_KR \
+		-l nl_NL \
+		-l pl_PL \
+		-l ru \
+		-l sk \
+		-l uk \
+		-l zh_Hans
 
 # Graph models
 .PHONY: graph_models
