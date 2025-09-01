@@ -91,12 +91,6 @@ repos:
         name: Fix requirements.txt
         description: Fix the formatting of requirements.txt files.
 
-      - id: fix-encoding-pragma
-        name: Fix encoding pragma
-        description: Fix the encoding pragma in Python files.
-        args:
-          - --remove
-
       - id: fix-byte-order-marker
         name: Fix byte order marker
         description: Fix the byte order marker in Python files.
