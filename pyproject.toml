@@ -40,7 +40,7 @@ dependencies = [
     "allianceauth>=4.3.1,<5",
 ]
 urls.Changelog = "https://github.com/ppfeufer/aa-example-plugin/blob/master/CHANGELOG.md"
-urls."Issue / Bug Reports" = "https://github.com/ppfeufer/aa-example-plugin/issues"
+urls.Tracker = "https://github.com/ppfeufer/aa-example-plugin/issues"
 
 [tool.hatch.version]
 path = "example/__init__.py"
