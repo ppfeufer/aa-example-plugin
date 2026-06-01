@@ -44,7 +44,7 @@ urls.Changelog = "https://github.com/ppfeufer/aa-example-plugin/blob/master/CHAN
 urls.Tracker = "https://github.com/ppfeufer/aa-example-plugin/issues"
 
 [tool.hatch]
+version.path = "example/__init__.py"
 build.include = [
     "/example",
 ]
-version.path = "example/__init__.py"
