@@ -13,6 +13,13 @@ _(These badges are examples, you can and should replace them with your own)_
 For the GitLab version of this example app, please have a look over here, Erik
 Kalkoken was so friendly to provide it » [Alliance Auth Example App (GitLab Version)](https://gitlab.com/ErikKalkoken/allianceauth-example-plugin)
 
+> [!IMPORTANT]
+>
+> **This app needs Alliance Auth v5!**
+>
+> Please make sure to update your Alliance Auth instance **before** you install this
+> version, otherwise an update to Alliance Auth will be pulled in unsupervised.
+
 ______________________________________________________________________
 
 <!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=1 -->
