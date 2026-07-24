@@ -3,7 +3,7 @@ name: Tests
 env:
   COVERAGE_DATABASE_VERSION: mariadb:10.11
   COVERAGE_PYTHON_VERSION: 3.12
-  NODE_VERSION: 24 # [LTS] End of Life: 30 Apr 2028 (https://endoflife.date/nodejs)
+  NODE_VERSION: 26 # [LTS] End of Life: 30 Apr 2029 (https://endoflife.date/nodejs)
   REDIS_VERSION: latest
 
 on:
@@ -40,7 +40,7 @@ jobs:
 
       # Set up Node.js
 #      - name: Setup Node.js
-#        uses: actions/setup-node@v4
+#        uses: actions/setup-node@v6
 #        with:
 #          # https://endoflife.date/nodejs
 #          node-version: ${{ env.NODE_VERSION }}
@@ -51,7 +51,7 @@ jobs:
       - name: Run Pre Commit Checks
         uses: pre-commit/action@v3.0.1
 
-  # Run Test Coverage
+  # Run Test Coverage for Laatest Release
   test-coverage:
     needs: [ pre-commit ]
     name: AA Latest (Python ${{ matrix.python-version }} with ${{ matrix.database }})
@@ -78,7 +78,7 @@ jobs:
 #          - mariadb:11.8  # [LTS] Maintained until: 04 Jun 2028
 #          - mariadb:12.3  # [LTS] Maintained until: 30 Jun 2029
 #
-##    continue-on-error: ${{ matrix.python-version == '3.12' }}
+##    continue-on-error: ${{ matrix.python-version == '3.14' }}
 #
 #    # Set up services
 #    services:
